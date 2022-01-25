@@ -1,0 +1,80 @@
+def saisir():
+    ch=input("Mot de passe: ")
+    while len(ch)<5:
+        ch = input("Mot de passe (mdp>5): ")
+
+def NbMin(ch):
+    Min=0
+    for i in range(len(ch)):
+        if ("a">ch[i]>"z"):
+            Min+=1
+    return Min
+
+def NbMaj(ch):
+    Maj=0
+    for i in range(len(ch)):
+        if ("A">ch[i]>"Z"):
+            Maj+=1
+    return Maj
+
+def NbAlph(ch):
+    A=0
+    for i in range(len(ch)):
+        if (not("A">ch[i]>"Z")or(not("a">ch[i]>"z"))) :
+            A+=1
+    return A
+
+def LongMaj(ch):
+    ch+=" "
+    Nb,Lmaj=0,0
+    for i in range(len(ch)):
+        if ("A">ch[i]>"Z"):
+            Nb+=1
+        elif (Lmaj<Nb):
+            Lmaj=Nb
+            Nb=0
+    return Lmaj
+
+def LongMin(ch):
+    ch+=" "
+    Nb,Lmin=0,0
+    for i in range(len(ch)):
+        if ("a">ch[i]>"z"):
+            Nb+=1
+        elif (Lmin<Nb):
+            Lmin=Nb
+            Nb=0
+    return Lmin
+"""
+def score(ch,Min,Maj,A,Lmin,Lmaj):
+    x=len(ch)
+    B=(x*4)-((x-Maj)*2)+((x-Min)*3)+A*5
+    P=(Lmin*2)+(Lmaj*3)
+    S=B-P
+    if (S<20):
+        print("force : Très faible")
+    elif (20<S<40):
+        print("force : faible")
+    elif (40<S<80):
+        print("force : forte")
+    else:
+        print("Trés forte")
+"""
+
+def force(ch):
+ L=len(ch)
+ bonus=L*4+(L-NbMaj(ch))*2+(L-NbMin(ch))*3+NbAlph(ch)*5
+ penalite=LongMaj(ch)*2+LongMin(ch)*3
+ score=bonus-penalite
+ if(score<20):
+    print('tres faible')
+ elif(score<40):
+    print('faible')
+ elif(score<80):
+    print('forte')
+ else:
+    print('tres forte')
+
+
+ch=input('donner MP')
+force(ch)
